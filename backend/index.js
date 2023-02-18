@@ -9,5 +9,5 @@ app.use('/auth',require('./routes/auth'));
 app.use('/note',require('./routes/note'))
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`iNoteBook listening on port ${port}`)
 })
