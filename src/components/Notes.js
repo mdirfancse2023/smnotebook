@@ -109,12 +109,12 @@ const onChange = (e)=>{
               <button
               ref={refClose}
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-outline-dark"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button disabled={note.etitle.length<5||note.edescription.length<5} onClick={click} type="button" className="btn btn-primary">
+              <button disabled={note.etitle.length<5||note.edescription.length<5} onClick={click} type="button" className="btn btn-outline-dark">
                 Update Note
               </button>
             </div>

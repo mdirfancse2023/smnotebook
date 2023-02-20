@@ -15,14 +15,15 @@ router.post(
     body("password", "Enter a valid password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ sucess,errors: errors.array() });
     }
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res.status(400).json({ error: "Duplicate User Found" });
+        return res.status(400).json({ success,error: "Duplicate User Found" });
       }
       const salt = await bcrypt.genSalt(10);
       const secPassword = await bcrypt.hash(req.body.password, salt);
@@ -37,7 +38,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT);
-      res.json({ authToken });
+      success = true;
+      res.json({ success,authToken });
     } catch (error) {
       //console.error(error.message);
       res.status(500).send("Some Error Occured");
@@ -53,6 +55,7 @@ router.post(
     body("password", "Enter a valid password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -65,7 +68,8 @@ router.post(
       }
       const passwordCom = await bcrypt.compare(password, user.password);
       if (!passwordCom) {
-        return res.status(500).send("Incorrect Credentials");
+        success = false;
+        return res.status(500).send({success,error:"Incorrect Credentials"});
       }
       const data = {
         user: {
@@ -73,7 +77,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT);
-      res.json({ authToken });
+      success = true;
+      res.json({ success,authToken });
     } catch (error) {
       //console.error(error.message);
       res.status(500).send("Internel Server Error");
