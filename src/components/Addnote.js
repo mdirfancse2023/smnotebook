@@ -7,6 +7,7 @@ const Addnote = () => {
     const click = (e)=>{
         e.preventDefault();
         addNote(note.title,note.description,note.tag);
+        setNote({title:"", description:"", tag:""})
     }
     const onChange = (e)=>{
         setNote({...note,[e.target.name]:e.target.value})
@@ -26,6 +27,9 @@ const Addnote = () => {
             id="title"
             aria-describedby="emailHelp"
             onChange={onChange}
+            value={note.title}
+            minLength={5}
+                    required
           />
         </div>
         <div className="mb-3">
@@ -34,23 +38,29 @@ const Addnote = () => {
           </label>
           <input
             type="text"
+            value={note.description}
             className="form-control"
             name='description'
             id="description"
             onChange={onChange}
+            minLength={5}
+                    required
           />
         </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
+        <div className="mb-3">
+          <label htmlFor="tag" className="form-label">
+            Tag
           </label>
+          <input
+            type="text"
+            value={note.tag}
+            className="form-control"
+            name='tag'
+            id="tag"
+            onChange={onChange}
+          />
         </div>
-        <button type="submit" onClick={click} className="btn btn-primary">
+        <button disabled={note.title.length<5||note.description.length<5} type="submit" onClick={click} className="btn btn-primary">
           Add Note
         </button>
       </form>
