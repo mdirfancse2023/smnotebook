@@ -3,7 +3,7 @@ import noteContext from "../context/notes/noteContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNote, editNote} = context;
   const [note,setNote] = useState({id:"",etitle:"", edescription:"", etag:""})
@@ -16,17 +16,19 @@ const Notes = () => {
   const updateNote = (currentNote) => {
     ref.current.click();
     setNote({id:currentNote._id, etitle:currentNote.title,edescription:currentNote.description,etag:currentNote.tag});
+    
   };
   const click = (e)=>{
     editNote(note.id,note.etitle,note.edescription,note.etag);
     refClose.current.click();
+    props.showAlert("Updated Successfully","success")
 }
 const onChange = (e)=>{
     setNote({...note,[e.target.name]:e.target.value})
 }
   return (
     <>
-      <Addnote />
+      <Addnote showAlert={props.showAlert}/>
       <button
       style={{display:"none"}}
         type="button"
@@ -128,7 +130,7 @@ const onChange = (e)=>{
         </div>
         {notes.map((note) => {
           return (
-            <Noteitem key={note._id} updateNote={updateNote} note={note} />
+            <Noteitem key={note._id} showAlert={props.showAlert} updateNote={updateNote} note={note} />
           );
         })}
       </div>

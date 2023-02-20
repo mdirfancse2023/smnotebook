@@ -18,7 +18,7 @@ router.post(
     let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ sucess,errors: errors.array() });
+      return res.status(400).json({ success,errors: errors.array() });
     }
     try {
       let user = await User.findOne({ email: req.body.email });
