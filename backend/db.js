@@ -1,7 +1,7 @@
 // Use to connect with database
 const mongoose = require('mongoose');
-const mongouri = 'mongodb+srv://inotebook:connect@inotebook.zrpvbmj.mongodb.net/inotebook'
-//const mongouri = 'mongodb://localhost:27017/inotebook';
+//const mongouri = 'mongodb+srv://inotebook:connect@inotebook.zrpvbmj.mongodb.net/inotebook'
+const mongouri = 'mongodb://localhost:27017/inotebook';
 const connectToMongo = async ()=>{
     await mongoose.connect(mongouri);
 }

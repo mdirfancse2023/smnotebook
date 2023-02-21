@@ -19,7 +19,7 @@ const Signup = (props) => {
     //console.log(json);
     if(json.success){
         localStorage.setItem('token',json.authToken);
-        history("/")
+        history("/inotebook")
         props.showAlert("Account Created","success")
       }
       else{

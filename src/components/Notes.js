@@ -13,7 +13,7 @@ const Notes = (props) => {
         getNote();
     }
     else{
-      history("/login")
+      history("/inotebook/login")
     }
     // eslint-disable-next-line
   }, []);

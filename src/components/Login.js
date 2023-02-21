@@ -16,7 +16,7 @@ const Login = (props) => {
           //console.log(json);
           if(json.success){
             localStorage.setItem('token',json.authToken);
-            history("/")
+            history("/inotebook")
             props.showAlert("Login Success","success")
           }
           else{

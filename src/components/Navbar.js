@@ -6,12 +6,12 @@ const Navbar = () => {
   let history = useNavigate();
   const logout = ()=>{
     localStorage.removeItem('token');
-    history("/login")
+    history("/inotebook/login")
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/inotebook">
           iNoteBook
         </Link>
         <button
@@ -28,19 +28,19 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname==='/'?"active":""}`} aria-current="page" to="/">
+              <Link className={`nav-link ${location.pathname==='/inotebook'?"active":""}`} aria-current="page" to="/inotebook">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname==='/about'?"active":""}`} to="/about">
+              <Link className={`nav-link ${location.pathname==='/inotebook/about'?"active":""}`} to="/inotebook/about">
                 About
               </Link>
             </li>
           </ul>
           {!localStorage.getItem('token')?<form className="d-flex" role="search">
-          <Link className="btn btn-outline-light mx-1" to="/login" role="button">Login</Link>
-          <Link className="btn btn-outline-light mx-1" to="/signup" role="button">Signup</Link>
+          <Link className="btn btn-outline-light mx-1" to="/inotebook/login" role="button">Login</Link>
+          <Link className="btn btn-outline-light mx-1" to="/inotebook/signup" role="button">Signup</Link>
           </form>:<button onClick={logout} className="btn btn-outline-light">Logout</button>}
         </div>
       </div>
